@@ -13,14 +13,16 @@ node {
         }
     
         stage('Build') {
-            steps {
+            def mvnHome = tool name: 'newmav', type: 'maven'
+            def mvnCMD = "${mvnHome}/bin/mvn"
                 sh '${mvnCMD} -B -DskipTests clean package'
-            }
+            
         }
         stage('Test') {
-            steps {
+         def mvnHome = tool name: 'newmav', type: 'maven'
+            def mvnCMD = "${mvnHome}/bin/mvn"
                 sh '${mvnCMD} test'
-            }
+            
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
