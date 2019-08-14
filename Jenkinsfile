@@ -1,6 +1,6 @@
 pipeline {
-    agent any
-    stages {
+    
+   
         
         stage('mvnpackage'){
             def mvnHome = tool name: 'newmav', type: 'maven'
@@ -32,4 +32,3 @@ pipeline {
             }
         }
     }
-}
