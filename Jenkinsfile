@@ -9,26 +9,4 @@ pipeline {
         }
         
     
-        stage('Build') {
-            steps {
-                 
-                sh '${mvnCMD} -B -DskipTests clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                 
-                sh '${mvnCMD} test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Deliver') { 
-            steps {
-                sh './jenkins/scripts/deliver.sh' 
-            }
-        }
     }
