@@ -4,7 +4,7 @@ node {
     }
         
     
-   stages {
+ 
         
         stage('mvnpackage'){
             def mvnHome = tool name: 'newmav', type: 'maven'
@@ -14,12 +14,12 @@ node {
     
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh '${mvnCMD} -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh '${mvnCMD} test'
             }
             post {
                 always {
@@ -32,7 +32,7 @@ node {
                 sh './jenkins/scripts/deliver.sh' 
             }
         }
-    }
+    
         
     
     }
